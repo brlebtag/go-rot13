@@ -1,10 +1,10 @@
 package main
 
 import (
-    "os"
-    "bufio"
+	"os"
+	"bufio"
 	"log"
-    "io"
+	"io"
 )
 
 type rot13Reader struct {
@@ -24,15 +24,15 @@ func (rot *rot13Reader) Read(p []byte) (n int, err error) {
 }
 
 func main() {
-    info, err := os.Stdin.Stat()
+	info, err := os.Stdin.Stat()
 
-    if err != nil {
-        log.Fatal(err)
-    }
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    if info.Mode() & os.ModeCharDevice != os.ModeCharDevice {
-        stdIn := bufio.NewReader(os.Stdin)
-        reader := rot13Reader{stdIn}
-        io.Copy(os.Stdout, &reader)
-    }
+	if info.Mode() & os.ModeCharDevice != os.ModeCharDevice {
+		stdIn := bufio.NewReader(os.Stdin)
+		reader := rot13Reader{stdIn}
+		io.Copy(os.Stdout, &reader)
+	}
 }
